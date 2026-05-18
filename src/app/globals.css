@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-background: var(--background);
@@ -8,20 +9,33 @@
   --color-neon-cyan: #00f0ff;
   --color-neon-purple: #7a00ff;
   --color-neon-pink: #ff00a0;
-  
+
   --font-sans: var(--font-inter), sans-serif;
-  
+
   --animate-aurora: aurora 20s linear infinite;
   --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-scan: scan 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
   @keyframes aurora {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
   }
+
   @keyframes scan {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(200%); }
+    0% {
+      transform: translateY(-100%);
+    }
+
+    100% {
+      transform: translateY(200%);
+    }
   }
 }
 
@@ -33,11 +47,9 @@
   --font-inter: "Inter", sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-  }
+.dark {
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 body {

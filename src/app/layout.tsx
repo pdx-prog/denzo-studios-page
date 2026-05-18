@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn(inter.variable, "antialiased bg-black text-white relative min-h-screen")}>
-        <div className="hero-glow" />
-        {children}
+        <Providers>
+          <div className="hero-glow" />
+          {children}
+        </Providers>
       </body>
     </html>
   );

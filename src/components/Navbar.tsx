@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Phone, ChevronDown, Search, BrainCircuit, PhoneCall, Palette, Code2, Menu, X, Globe } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
   { name: "Home", href: "/" },
@@ -109,6 +110,7 @@ export default function Navbar() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-4 relative z-50">
+          <ThemeToggle />
           <a href="tel:8332002676" className="hidden md:flex items-center gap-2 text-black/90 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors text-sm">
             <Phone className="w-4 h-4 text-neon-cyan" />
             833-200-2676
@@ -187,6 +189,7 @@ export default function Navbar() {
                   <Phone className="w-6 h-6 text-neon-cyan" />
                   833-200-2676
                 </a>
+                <ThemeToggle />
               </div>
             </div>
           </motion.div>
