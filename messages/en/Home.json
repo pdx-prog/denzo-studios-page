@@ -1,0 +1,95 @@
+{
+    "Hero": {
+        "badge": "Denzo Studios Pro",
+        "headline1": "Results",
+        "headline2": "that matter.",
+        "subheadline": "Powering businesses",
+        "description": " with intelligent AI solutions, master-grade web architecture, and ROI-focused advertising partners. Precision at every layer.",
+        "cta": "REQUEST A DEMO"
+    },
+    "TrustTicker": {
+        "badge": "Our Advertising Partners"
+    },
+    "BentoGrid": {
+        "heading1": "Intelligent",
+        "heading2": "Efficiency.",
+        "heading3": "Seamless",
+        "heading4": "Innovation.",
+        "description": "We build scalable systems that strengthen existing workflows and connect AI agents with your data, APIs, and applications for smarter decisions.",
+        "ai_title": "AI Development",
+        "ai_desc": "At the core of what we do. We combine predictive analytics, NLP, computer vision, and automation to deliver scalable systems tailored to business needs. Leveraging MCP (Model Context Protocol).",
+        "ads_title": "Google & Meta Ads",
+        "ads_desc": "Boost your business by connecting with ideal customers perfectly when they're searching. We focus on master-grade ROI tracking and strategic precision reporting.",
+        "seo_title": "SEO Excellence",
+        "seo_desc": "Boost your online presence and drive organic traffic with proven search engine strategies.",
+        "web_title": "Website Services",
+        "web_desc": "Custom, high-performance sites that strengthen your online presence and align perfectly with your business goals.",
+        "partners_title": "Ad Partners",
+        "partners_desc": "YouTube, Amazon Ads, TikTok Ads, Bing, Google Ads.",
+        "reviews_title": "Listings & Reviews",
+        "reviews_desc": "Google Business, Nextdoor, Birdeye, Angi, Yelp.",
+        "design_title": "Graphic Design",
+        "design_desc": "Expert design that captures your brand essence and engages audiences.",
+        "callcenter_title": "Call Center Support",
+        "callcenter_desc": "Bilingual, cost-effective support designed to enhance customer satisfaction."
+    },
+    "VisualShowcase": {
+        "badge": "ECOSYSTEM",
+        "heading1": "The Interface of",
+        "heading2": "Future ROI.",
+        "desktop_title": "Pro Intelligence.",
+        "desktop_desc": "Your entire workflow, accelerated by generative AI.",
+        "mobile_title": "Mobile Autopilot.",
+        "mobile_desc": "Command your AI from anywhere."
+    },
+    "TripleGrowth": {
+        "roi_title": "Tracking ROI",
+        "roi_1": "Measure the real impact of your investment.",
+        "roi_2": "Make decisions based on actual results.",
+        "roi_3": "Optimize every dollar in your campaigns.",
+        "roi_4": "Avoid spending without proven returns.",
+        "roi_5": "Know which strategy truly drives revenue.",
+        "strategy_title": "Strategies",
+        "strategy_1": "Clear strategy means less waste, more wins.",
+        "strategy_2": "Direction beats speed – plan before launching.",
+        "strategy_3": "Strategic campaigns connect better with audiences.",
+        "strategy_4": "Every goal needs a roadmap to succeed.",
+        "strategy_5": "Stronger planning leads to smarter ad spend.",
+        "reporting_title": "Reporting",
+        "reporting_1": "Clarity through data. Precision through reporting.",
+        "reporting_2": "Performance measured. Strategy elevated. Results refined.",
+        "reporting_3": "Insight is the new competitive advantage.",
+        "reporting_4": "Success lies in knowing what works.",
+        "reporting_5": "Big decisions start with intelligent reporting."
+    },
+    "TechDNA": {
+        "badge": "AI Integration Core",
+        "headline1": "Connect.",
+        "headline2": "Automate.",
+        "headline3": "Dominate.",
+        "description": "We focus on seamless integrations with CRMs, ERPs, and cloud tools, ensuring AI strengthens existing workflows. Our systems unite predictive analytics and automation for a master-grade competitive edge.",
+        "tech1": "Predictive Analytics & NLP",
+        "tech2": "Computer Vision Systems",
+        "tech3": "Machine Learning Models"
+    },
+    "EcommerceTicker": {
+        "badge": "Integrations"
+    },
+    "Footer": {
+        "tagline": "Building intelligent solutions that enhance efficiency and innovation through AI development and strategic marketing.",
+        "services": "Services",
+        "link_ads": "Google & Meta Ads",
+        "link_seo": "SEO Optimization",
+        "link_ai": "AI Development",
+        "link_web": "Web Development",
+        "company": "Company",
+        "link_about": "About Us",
+        "link_careers": "Careers",
+        "link_privacy": "Privacy Policy",
+        "link_terms": "Terms & Conditions",
+        "contact": "Contact",
+        "bilingual": "Bilingual Support Available",
+        "copyright": "All rights reserved.",
+        "footer_tag": "Precision Engineering & Elite UI/UX"
+    }
+}

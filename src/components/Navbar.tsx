@@ -4,27 +4,33 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Phone, ChevronDown, Search, BrainCircuit, PhoneCall, Palette, Code2, Menu, X, Globe } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
+import LanguageSwitcher from "./LanguajeSwitcher";
 
-const links = [
-  { name: "Home", href: "/" },
-  {
-    name: "Services",
-    href: "/#services",
-    subServices: [
-      { name: "Google Ads", href: "/services/google-ads", icon: Sparkles, color: "text-neon-purple" },
-      { name: "Meta Ads", href: "/services/meta-ads", icon: Globe, color: "text-neon-pink" },
-      { name: "SEO Optimization", href: "/services/seo", icon: Search, color: "text-[#34C759]" },
-      { name: "AI Development", href: "/services/ai-development", icon: BrainCircuit, color: "text-neon-cyan" },
-      { name: "Call Center", href: "/services/call-center", icon: PhoneCall, color: "text-[#FF6B35]" },
-      { name: "Graphic Design", href: "/services/graphic-design", icon: Palette, color: "text-[#FF2D9B]" },
-      { name: "Website Development", href: "/services/website-development", icon: Code2, color: "text-[#4F46E5]" },
-    ]
-  },
-  { name: "About Us", href: "/about-us" },
-  { name: "Contact", href: "/contact" },
-];
+
 
 export default function Navbar() {
+  const t = useTranslations("Navbar");
+  const links = [
+    { name: t("home"), href: "/" },
+    {
+      name: t("services"),
+      href: "/#services",
+      subServices: [
+        { name: t("ga"), href: "/services/google-ads", icon: Sparkles, color: "text-neon-purple" },
+        { name: t("meta"), href: "/services/meta-ads", icon: Globe, color: "text-neon-pink" },
+        { name: t("so"), href: "/services/seo", icon: Search, color: "text-[#34C759]" },
+        { name: t("aid"), href: "/services/ai-development", icon: BrainCircuit, color: "text-neon-cyan" },
+        { name: t("cc"), href: "/services/call-center", icon: PhoneCall, color: "text-[#FF6B35]" },
+        { name: t("gd"), href: "/services/graphic-design", icon: Palette, color: "text-[#FF2D9B]" },
+        { name: t("wd"), href: "/services/website-development", icon: Code2, color: "text-[#4F46E5]" },
+      ]
+    },
+    { name: t("aboutUs"), href: "/about-us" },
+    { name: t("contact"), href: "/contact" },
+  ];
+
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -47,12 +53,12 @@ export default function Navbar() {
           }`}
       >
         {/* Logo */}
-        <a href="/" className="flex items-center relative z-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded-md group">
+        <Link href="/" className="flex items-center relative z-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded-md group">
           <div className="relative flex items-center justify-center">
             <img src="/logo.png" alt="Denzo Studios Logo" className="h-[56px] md:h-[72px] w-auto object-contain transition-all duration-300 dark:opacity-0 group-hover:scale-105" />
             <div className="absolute inset-0 bg-gradient-to-r from-[#007AFF] to-[#7AB6FF] [mask-image:url(/logo.png)] [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-image:url(/logo.png)] [-webkit-mask-size:contain] [-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] transition-all duration-300 opacity-0 dark:opacity-100 group-hover:scale-105" />
           </div>
-        </a>
+        </Link>
 
         {/* Desktop Links */}
         <div className="hidden lg:flex items-center gap-8 text-[10px] font-bold text-black/80 dark:text-white/60 uppercase tracking-[0.2em]">
@@ -85,7 +91,7 @@ export default function Navbar() {
                     >
                       <div className="grid grid-cols-3 gap-4">
                         {link.subServices.map((sub) => (
-                          <a
+                          <Link
                             key={sub.name}
                             href={sub.href}
                             className="p-4 rounded-2xl hover:bg-black/5 dark:hover:bg-white/5 transition-all text-black/80 dark:text-white/50 hover:text-black dark:hover:text-white flex flex-col gap-3 group/item border border-transparent hover:border-black/10 dark:hover:border-white/10"
@@ -97,7 +103,7 @@ export default function Navbar() {
                               <sub.icon className="w-5 h-5 group-hover/item:drop-shadow-[0_0_8px_currentColor]" />
                             </motion.div>
                             <span className="text-[10px] tracking-widest font-bold uppercase leading-tight">{sub.name}</span>
-                          </a>
+                          </Link>
                         ))}
                       </div>
                     </motion.div>
@@ -110,17 +116,18 @@ export default function Navbar() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-4 relative z-50">
+          <LanguageSwitcher />
           <ThemeToggle />
-          <a href="tel:8332002676" className="hidden md:flex items-center gap-2 text-black/90 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors text-sm">
+          <Link href="tel:8332002676" className="hidden md:flex items-center gap-2 text-black/90 dark:text-white/70 hover:text-black dark:hover:text-white transition-colors text-sm">
             <Phone className="w-4 h-4 text-neon-cyan" />
             833-200-2676
-          </a>
-          <a
+          </Link>
+          <Link
             href="tel:8332002676"
             className="text-[10px] font-bold uppercase tracking-widest bg-white text-black hover:bg-white/90 px-6 py-2.5 rounded-full transition-all active:scale-95 shadow-[0_0_20px_rgba(0,0,0,0.1)]"
           >
             Call Now
-          </a>
+          </Link>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -156,18 +163,18 @@ export default function Navbar() {
             <div className="flex flex-col gap-8 pb-12">
               {links.map((link) => (
                 <div key={link.name} className="flex flex-col gap-6">
-                  <a
+                  <Link
                     href={link.href}
                     onClick={() => !link.subServices && setIsMobileMenuOpen(false)}
                     className="text-3xl font-bold tracking-tighter hover:text-neon-cyan transition-colors"
                   >
                     {link.name}
-                  </a>
+                  </Link>
 
                   {link.subServices && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ml-4">
                       {link.subServices.map((sub) => (
-                        <a
+                        <Link
                           key={sub.name}
                           href={sub.href}
                           onClick={() => setIsMobileMenuOpen(false)}
@@ -177,7 +184,7 @@ export default function Navbar() {
                             <sub.icon className="w-5 h-5" />
                           </div>
                           <span className="text-xs font-bold uppercase tracking-widest">{sub.name}</span>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   )}
@@ -185,10 +192,11 @@ export default function Navbar() {
               ))}
 
               <div className="mt-8 pt-8 border-t border-black/10 dark:border-white/10 flex flex-col gap-6">
-                <a href="tel:8332002676" className="flex items-center gap-4 text-2xl font-bold tracking-tight">
+                <Link href="tel:8332002676" className="flex items-center gap-4 text-2xl font-bold tracking-tight">
                   <Phone className="w-6 h-6 text-neon-cyan" />
                   833-200-2676
-                </a>
+                </Link>
+                <LanguageSwitcher />
                 <ThemeToggle />
               </div>
             </div>

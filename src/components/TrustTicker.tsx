@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { SiYoutube, SiTiktok, SiGoogle, SiMeta } from "react-icons/si";
 import { FaAmazon, FaMicrosoft } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 // --- Custom Brand Lockups ---
 const MetaLogo = () => (
@@ -59,11 +60,12 @@ const partners = [
 ];
 
 export default function TrustTicker() {
+  const t = useTranslations("Home.TrustTicker");
   return (
     <div className="py-24 md:py-40 bg-white dark:bg-black/10 dark:bg-white/5 dark:bg-black/40 border-y border-black/5 dark:border-white/5 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 mb-16 md:mb-20 text-center">
         <div className="inline-flex items-center justify-center px-6 py-2 bg-[#FFF3E0] dark:bg-orange-900/20 border border-[#FFD699] dark:border-orange-700/30 rounded-full shadow-sm">
-          <span className="text-[10px] font-bold uppercase tracking-[0.4em] bg-gradient-to-r from-[#FF9500]/60 via-[#FFC566] to-[#FF9500]/60 text-transparent bg-clip-text">Our Advertising Partners</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] bg-gradient-to-r from-[#FF9500]/60 via-[#FFC566] to-[#FF9500]/60 text-transparent bg-clip-text">{t("badge")}</span>
         </div>
       </div>
       
