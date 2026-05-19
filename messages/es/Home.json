@@ -1,0 +1,95 @@
+{
+    "Hero": {
+        "badge": "Denzo Studios Pro",
+        "headline1": "Resultados",
+        "headline2": "que importan.",
+        "subheadline": "Impulsando negocios",
+        "description": " con soluciones inteligentes de IA, arquitectura web de alto nivel y socios publicitarios enfocados en el ROI. Precisión en cada capa.",
+        "cta": "SOLICITAR DEMO"
+    },
+    "TrustTicker": {
+        "badge": "Nuestros Socios Publicitarios"
+    },
+    "BentoGrid": {
+        "heading1": "Eficiencia",
+        "heading2": "Inteligente.",
+        "heading3": "Innovación",
+        "heading4": "Sin Límites.",
+        "description": "Construimos sistemas escalables que potencian los flujos de trabajo existentes y conectan agentes de IA con tus datos, APIs y aplicaciones para decisiones más inteligentes.",
+        "ai_title": "Desarrollo de IA",
+        "ai_desc": "En el núcleo de lo que hacemos. Combinamos analítica predictiva, PLN, visión por computadora y automatización para entregar sistemas escalables adaptados a las necesidades del negocio. Usando MCP (Protocolo de Contexto de Modelo).",
+        "ads_title": "Google & Meta Ads",
+        "ads_desc": "Impulsa tu negocio conectando con clientes ideales en el momento exacto en que buscan. Nos enfocamos en seguimiento de ROI de alto nivel y reportes de precisión estratégica.",
+        "seo_title": "Excelencia en SEO",
+        "seo_desc": "Aumenta tu presencia en línea y genera tráfico orgánico con estrategias de posicionamiento comprobadas.",
+        "web_title": "Servicios Web",
+        "web_desc": "Sitios personalizados y de alto rendimiento que fortalecen tu presencia en línea y se alinean perfectamente con tus objetivos de negocio.",
+        "partners_title": "Socios Publicitarios",
+        "partners_desc": "YouTube, Amazon Ads, TikTok Ads, Bing, Google Ads.",
+        "reviews_title": "Listados y Reseñas",
+        "reviews_desc": "Google Business, Nextdoor, Birdeye, Angi, Yelp.",
+        "design_title": "Diseño Gráfico",
+        "design_desc": "Diseño experto que captura la esencia de tu marca y conecta con tu audiencia.",
+        "callcenter_title": "Soporte Call Center",
+        "callcenter_desc": "Soporte bilingüe y rentable diseñado para mejorar la satisfacción del cliente."
+    },
+    "VisualShowcase": {
+        "badge": "ECOSISTEMA",
+        "heading1": "La Interfaz del",
+        "heading2": "ROI del Futuro.",
+        "desktop_title": "Inteligencia Pro.",
+        "desktop_desc": "Todo tu flujo de trabajo, acelerado por IA generativa.",
+        "mobile_title": "Piloto Automático Móvil.",
+        "mobile_desc": "Controla tu IA desde cualquier lugar."
+    },
+    "TripleGrowth": {
+        "roi_title": "Seguimiento de ROI",
+        "roi_1": "Mide el impacto real de tu inversión.",
+        "roi_2": "Toma decisiones basadas en resultados reales.",
+        "roi_3": "Optimiza cada peso en tus campañas.",
+        "roi_4": "Evita gastar sin retornos comprobados.",
+        "roi_5": "Sabe qué estrategia realmente genera ingresos.",
+        "strategy_title": "Estrategias",
+        "strategy_1": "Una estrategia clara significa menos desperdicio y más victorias.",
+        "strategy_2": "La dirección supera a la velocidad: planifica antes de lanzar.",
+        "strategy_3": "Las campañas estratégicas conectan mejor con las audiencias.",
+        "strategy_4": "Cada objetivo necesita una hoja de ruta para tener éxito.",
+        "strategy_5": "Una planificación más sólida genera una inversión publicitaria más inteligente.",
+        "reporting_title": "Reportes",
+        "reporting_1": "Claridad a través de datos. Precisión a través de reportes.",
+        "reporting_2": "Rendimiento medido. Estrategia elevada. Resultados refinados.",
+        "reporting_3": "El análisis es la nueva ventaja competitiva.",
+        "reporting_4": "El éxito radica en saber qué funciona.",
+        "reporting_5": "Las grandes decisiones comienzan con reportes inteligentes."
+    },
+    "TechDNA": {
+        "badge": "Núcleo de Integración IA",
+        "headline1": "Conecta.",
+        "headline2": "Automatiza.",
+        "headline3": "Domina.",
+        "description": "Nos enfocamos en integraciones fluidas con CRMs, ERPs y herramientas en la nube, asegurando que la IA fortalezca los flujos de trabajo existentes. Nuestros sistemas unen analítica predictiva y automatización para una ventaja competitiva de alto nivel.",
+        "tech1": "Analítica Predictiva y PLN",
+        "tech2": "Sistemas de Visión por Computadora",
+        "tech3": "Modelos de Aprendizaje Automático"
+    },
+    "EcommerceTicker": {
+        "badge": "Integraciones"
+    },
+    "Footer": {
+        "tagline": "Construyendo soluciones inteligentes que mejoran la eficiencia e innovación a través del desarrollo de IA y el marketing estratégico.",
+        "services": "Servicios",
+        "link_ads": "Google & Meta Ads",
+        "link_seo": "Optimización SEO",
+        "link_ai": "Desarrollo de IA",
+        "link_web": "Desarrollo Web",
+        "company": "Empresa",
+        "link_about": "Sobre Nosotros",
+        "link_careers": "Empleos",
+        "link_privacy": "Política de Privacidad",
+        "link_terms": "Términos y Condiciones",
+        "contact": "Contacto",
+        "bilingual": "Soporte Bilingüe Disponible",
+        "copyright": "Todos los derechos reservados.",
+        "footer_tag": "Ingeniería de Precisión & UI/UX Elite"
+    }
+}
