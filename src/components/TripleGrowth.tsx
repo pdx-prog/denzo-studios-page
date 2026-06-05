@@ -15,7 +15,7 @@ export default function TripleGrowth() {
       iconColor: "text-[#007AFF]",
       iconBg: "bg-[#007AFF]/10 border-[#007AFF]/20",
       icon: <CheckCircle2 />,
-      points: [t("roi_1"), t("roi_2"), t("roi_3"), t("roi_4"), t("roi_5")],
+      points: [t("roi_1"), t("roi_2"), t("roi_3")],
     },
     {
       title: t("strategy_title"),
@@ -23,7 +23,7 @@ export default function TripleGrowth() {
       iconColor: "text-[#BF5AF2]",
       iconBg: "bg-[#BF5AF2]/10 border-[#BF5AF2]/20",
       icon: <Target />,
-      points: [t("strategy_1"), t("strategy_2"), t("strategy_3"), t("strategy_4"), t("strategy_5")],
+      points: [t("strategy_1"), t("strategy_2"), t("strategy_3")],
     },
     {
       title: t("reporting_title"),
@@ -31,7 +31,7 @@ export default function TripleGrowth() {
       iconColor: "text-[#FF9500]",
       iconBg: "bg-[#FF9500]/10 border-[#FF9500]/20",
       icon: <BarChart3 />,
-      points: [t("reporting_1"), t("reporting_2"), t("reporting_3"), t("reporting_4"), t("reporting_5")],
+      points: [t("reporting_1"), t("reporting_2"), t("reporting_3")],
     },
   ];
 
