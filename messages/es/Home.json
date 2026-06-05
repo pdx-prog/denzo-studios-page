@@ -10,6 +10,16 @@
     "TrustTicker": {
         "badge": "Nuestros Socios Publicitarios"
     },
+    "Cards": {
+        "title": "Explora nuestros ",
+        "title_highlight": "Servicios.",
+        "kicker_ai": "Innovación",
+        "kicker_ads": "Crecimiento",
+        "kicker_seo": "Visibilidad",
+        "kicker_web": "Arquitectura",
+        "kicker_design": "Estética",
+        "kicker_callcenter": "Soporte"
+    },
     "BentoGrid": {
         "heading1": "Eficiencia",
         "heading2": "Inteligente.",

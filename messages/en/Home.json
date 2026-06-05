@@ -10,6 +10,16 @@
     "TrustTicker": {
         "badge": "Our Advertising Partners"
     },
+    "Cards": {
+        "title": "Explore our ",
+        "title_highlight": "Services.",
+        "kicker_ai": "Innovation",
+        "kicker_ads": "Growth",
+        "kicker_seo": "Visibility",
+        "kicker_web": "Architecture",
+        "kicker_design": "Aesthetics",
+        "kicker_callcenter": "Support"
+    },
     "BentoGrid": {
         "heading1": "Intelligent",
         "heading2": "Efficiency.",
