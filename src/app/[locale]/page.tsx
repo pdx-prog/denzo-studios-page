@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import Cards from "@/components/Cards";
 import TrustTicker from "@/components/TrustTicker";
 import BentoGrid from "@/components/BentoGrid";
 import TripleGrowth from "@/components/TripleGrowth";
@@ -13,7 +14,9 @@ export default function Home() {
     <main className="flex min-h-screen flex-col bg-background text-foreground selection:bg-neon-cyan/30">
       <Navbar />
       <Hero />
+      <Cards />
       <TrustTicker />
+
       <div id="services">
         <BentoGrid />
       </div>
