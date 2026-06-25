@@ -4,6 +4,8 @@ import HeroSection from "@/components/jointheteam/HeroSection";
 import JobsSection from "@/components/jointheteam/JobsSection";
 import AboutSection from "@/components/jointheteam/AboutSection";
 import CultureSection from "@/components/jointheteam/CultureSection";
+import FSPreloader from "@/components/jointheteam/FSPreloader";
+import { PreloaderProvider } from "@/components/jointheteam/PreloaderContext";
 
 export const metadata = {
   title: "Únete al equipo | Denzo Studios",
@@ -12,15 +14,18 @@ export const metadata = {
 
 export default function JoinTheTeamPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0a0a]">
-      <JoinNavbar />
-      <main className="flex-grow">
-        <HeroSection />
-        <JobsSection />
-        <AboutSection />
-        <CultureSection />
-      </main>
-      <JoinFooter />
-    </div>
+    <PreloaderProvider>
+      <div className="flex flex-col min-h-screen bg-white dark:bg-[#0a0a0a]">
+        <FSPreloader />
+        <JoinNavbar />
+        <main className="flex-grow">
+          <HeroSection />
+          <JobsSection />
+          <AboutSection />
+          <CultureSection />
+        </main>
+        <JoinFooter />
+      </div>
+    </PreloaderProvider>
   );
 }
