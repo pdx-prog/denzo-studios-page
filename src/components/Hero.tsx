@@ -50,7 +50,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="text-7xl md:text-9xl lg:text-[11rem] font-bold tracking-tighter leading-[0.8] mb-12"
+          className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-[0.8] mb-12"
         >
           <span className="bg-gradient-to-r from-[#007AFF] via-[#BF5AF2] to-[#FF9500] text-transparent bg-clip-text drop-shadow-sm">
             {t("headline1")}

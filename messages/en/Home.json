@@ -1,14 +1,24 @@
 {
     "Hero": {
         "badge": "Denzo Studios Pro",
-        "headline1": "Results",
-        "headline2": "that matter.",
+        "headline1": "We create ",
+        "headline2": "your brand's future.",
         "subheadline": "Powering businesses",
         "description": " with intelligent AI solutions, master-grade web architecture, and ROI-focused advertising partners. Precision at every layer.",
         "cta": "REQUEST A DEMO"
     },
     "TrustTicker": {
         "badge": "Our Advertising Partners"
+    },
+    "Cards": {
+        "title": "Explore our ",
+        "title_highlight": "Services.",
+        "kicker_ai": "Innovation",
+        "kicker_ads": "Growth",
+        "kicker_seo": "Visibility",
+        "kicker_web": "Architecture",
+        "kicker_design": "Aesthetics",
+        "kicker_callcenter": "Support"
     },
     "BentoGrid": {
         "heading1": "Intelligent",
@@ -17,13 +27,13 @@
         "heading4": "Innovation.",
         "description": "We build scalable systems that strengthen existing workflows and connect AI agents with your data, APIs, and applications for smarter decisions.",
         "ai_title": "AI Development",
-        "ai_desc": "At the core of what we do. We combine predictive analytics, NLP, computer vision, and automation to deliver scalable systems tailored to business needs. Leveraging MCP (Model Context Protocol).",
+        "ai_desc": "Intelligent, customized solutions tailored to your business.",
         "ads_title": "Google & Meta Ads",
-        "ads_desc": "Boost your business by connecting with ideal customers perfectly when they're searching. We focus on master-grade ROI tracking and strategic precision reporting.",
+        "ads_desc": "Connect with customers who are ready to buy.",
         "seo_title": "SEO Excellence",
-        "seo_desc": "Boost your online presence and drive organic traffic with proven search engine strategies.",
+        "seo_desc": "We position your business at the top of search engine results.",
         "web_title": "Website Services",
-        "web_desc": "Custom, high-performance sites that strengthen your online presence and align perfectly with your business goals.",
+        "web_desc": "Custom, high-performance websites designed to strengthen your brand.",
         "partners_title": "Ad Partners",
         "partners_desc": "YouTube, Amazon Ads, TikTok Ads, Bing, Google Ads.",
         "reviews_title": "Listings & Reviews",
@@ -43,24 +53,18 @@
         "mobile_desc": "Command your AI from anywhere."
     },
     "TripleGrowth": {
-        "roi_title": "Tracking ROI",
-        "roi_1": "Measure the real impact of your investment.",
-        "roi_2": "Make decisions based on actual results.",
-        "roi_3": "Optimize every dollar in your campaigns.",
-        "roi_4": "Avoid spending without proven returns.",
-        "roi_5": "Know which strategy truly drives revenue.",
+        "roi_title": "ROI Tracking",
+        "roi_1": "Make decisions based on real results and maximize the return on your investment.",
+        "roi_2": "Measure the true impact of your business and avoid spending on campaigns that don't generate returns.",
+        "roi_3": "Discover exactly which strategies drive revenue and multiply your profits.",
         "strategy_title": "Strategies",
-        "strategy_1": "Clear strategy means less waste, more wins.",
-        "strategy_2": "Direction beats speed – plan before launching.",
-        "strategy_3": "Strategic campaigns connect better with audiences.",
-        "strategy_4": "Every goal needs a roadmap to succeed.",
-        "strategy_5": "Stronger planning leads to smarter ad spend.",
+        "strategy_1": "A solid plan helps you connect with your audience and prevents wasted budget.",
+        "strategy_2": "We create a clear roadmap to ensure every campaign achieves success.",
+        "strategy_3": "We define precise goals before launch to secure measurable business wins.",
         "reporting_title": "Reporting",
-        "reporting_1": "Clarity through data. Precision through reporting.",
-        "reporting_2": "Performance measured. Strategy elevated. Results refined.",
-        "reporting_3": "Insight is the new competitive advantage.",
-        "reporting_4": "Success lies in knowing what works.",
-        "reporting_5": "Big decisions start with intelligent reporting."
+        "reporting_1": "Clear and accurate data so you know exactly what works for your business.",
+        "reporting_2": "Smart insights that turn information into a competitive advantage.",
+        "reporting_3": "Monitor your performance with simple reports that make important decisions easier."
     },
     "TechDNA": {
         "badge": "AI Integration Core",
