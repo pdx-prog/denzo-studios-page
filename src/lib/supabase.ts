@@ -1,0 +1,12 @@
+import { createClient, SupabaseClient } from "@supabase/supabase-js";
+
+export function getSupabaseAdmin(): SupabaseClient {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl || !supabaseServiceKey) {
+    throw new Error("Supabase credentials are not configured in environment variables.");
+  }
+
+  return createClient(supabaseUrl, supabaseServiceKey);
+}
