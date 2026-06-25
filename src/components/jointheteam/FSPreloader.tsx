@@ -7,6 +7,8 @@ import { usePreloader } from "./PreloaderContext";
 export default function FSPreloader() {
   const FADE_OUT = 700;
   const HARD_LIMIT = 3000;
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
+  const textSize = isMobile ? "clamp(40px,11vw,96px)" : "clamp(28px,7vw,96px)";
 
   const { markDone } = usePreloader();
 
@@ -56,6 +58,9 @@ export default function FSPreloader() {
         @keyframes fillIn {
           to { fill: #FFFFFF; stroke-width: 0; }
         }
+        @media (max-width: 767px) {
+          #preloader-logo { width: 60vw !important; }
+        }
       `}</style>
 
       <div
@@ -86,6 +91,7 @@ export default function FSPreloader() {
           }}
         >
           <img
+            id="preloader-logo"
             src="/logo.png"
             alt="Denzo Studios"
             style={{
@@ -99,13 +105,38 @@ export default function FSPreloader() {
           />
 
           <svg
-            viewBox="0 0 1200 240"
+            viewBox="0 0 1200 320"
             style={{ width: "min(90vw,1100px)", height: "auto", color: "#FFFFFF" }}
           >
+            {/* Línea 1 */}
+            <text
+              x="50%"
+              y="38%"
+              textAnchor="middle"
+              dominantBaseline="middle"
+              style={{
+                fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+                fontSize: textSize,
+                fontWeight: 800,
+                letterSpacing: ".02em",
+                fill: "transparent",
+                stroke: "#FFFFFF",
+                strokeWidth: 2.2,
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                strokeDasharray: 2000,
+                strokeDashoffset: 2000,
+                animation: "draw 1.6s .3s ease-out forwards, fillIn .7s 1.9s ease forwards",
+              }}
+            >
+              Results that
+            </text>
+
+            {/* Línea 2 */}
             <text
               id="preloader-text"
               x="50%"
-              y="55%"
+              y="72%"
               textAnchor="middle"
               dominantBaseline="middle"
               onAnimationEnd={(e) => {
@@ -118,9 +149,8 @@ export default function FSPreloader() {
                 }
               }}
               style={{
-                fontFamily:
-                  "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-                fontSize: "clamp(28px,7vw,96px)",
+                fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
+                fontSize: textSize,
                 fontWeight: 800,
                 letterSpacing: ".02em",
                 fill: "transparent",
@@ -130,11 +160,10 @@ export default function FSPreloader() {
                 strokeLinejoin: "round",
                 strokeDasharray: 2000,
                 strokeDashoffset: 2000,
-                animation:
-                  "draw 1.6s .3s ease-out forwards, fillIn .7s 1.9s ease forwards",
+                animation: "draw 1.6s .3s ease-out forwards, fillIn .7s 1.9s ease forwards",
               }}
             >
-              Results that matters!
+              matters!
             </text>
           </svg>
         </div>
