@@ -7,8 +7,6 @@ import { usePreloader } from "./PreloaderContext";
 export default function FSPreloader() {
   const FADE_OUT = 700;
   const HARD_LIMIT = 3000;
-  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const textSize = isMobile ? "clamp(40px,11vw,96px)" : "clamp(28px,7vw,96px)";
 
   const { markDone } = usePreloader();
 
@@ -18,6 +16,7 @@ export default function FSPreloader() {
 
   const [visible, setVisible] = useState<boolean>(false);
   const [fading, setFading] = useState<boolean>(false);
+  const [animDone, setAnimDone] = useState(false);
 
   // Keep limits stable
   const limits = useMemo(() => ({ FADE_OUT, HARD_LIMIT }), []);
@@ -39,6 +38,17 @@ export default function FSPreloader() {
     return () => clearTimeout(kill);
   }, [mounted, limits, markDone]);
 
+  // Trigger fade when the text fill animation ends
+  const handleFillEnd = () => {
+    if (animDone) return;
+    setAnimDone(true);
+    setFading(true);
+    setTimeout(() => {
+      setVisible(false);
+      markDone();
+    }, FADE_OUT);
+  };
+
   // Until mounted, render nothing to keep SSR/CSR markup identical
   if (!mounted || !visible) return null;
 
@@ -52,14 +62,16 @@ export default function FSPreloader() {
         @keyframes logoIn {
           to { opacity: 1; transform: scale(1); }
         }
-        @keyframes draw {
-          to { stroke-dashoffset: 0; }
+        @keyframes textDraw {
+          from { opacity: 0; letter-spacing: -.04em; }
+          to   { opacity: 1; letter-spacing: .02em; }
         }
-        @keyframes fillIn {
-          to { fill: #FFFFFF; stroke-width: 0; }
+        @keyframes textReveal {
+          from { clip-path: inset(0 100% 0 0); }
+          to   { clip-path: inset(0 0% 0 0); }
         }
         @media (max-width: 767px) {
-          #preloader-logo { width: 60vw !important; }
+          #preloader-logo { width: 58vw !important; }
         }
       `}</style>
 
@@ -86,16 +98,17 @@ export default function FSPreloader() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: "clamp(12px,2.2vw,24px)",
-            padding: 24,
+            gap: "clamp(16px,3vw,32px)",
+            padding: "0 24px",
           }}
         >
+          {/* Logo */}
           <img
             id="preloader-logo"
             src="/logo.png"
             alt="Denzo Studios"
             style={{
-              width: "clamp(120px,18vw,220px)",
+              width: "clamp(140px,22vw,240px)",
               height: "auto",
               objectFit: "contain",
               opacity: 0,
@@ -104,68 +117,46 @@ export default function FSPreloader() {
             }}
           />
 
-          <svg
-            viewBox="0 0 1200 320"
-            style={{ width: "min(90vw,1100px)", height: "auto", color: "#FFFFFF" }}
+          {/* Text block – plain HTML so font sizes are real viewport units */}
+          <div
+            style={{
+              textAlign: "center",
+              lineHeight: 1.1,
+            }}
           >
-            {/* Línea 1 */}
-            <text
-              x="50%"
-              y="38%"
-              textAnchor="middle"
-              dominantBaseline="middle"
+            {/* Line 1 */}
+            <div
               style={{
                 fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-                fontSize: textSize,
+                fontSize: "clamp(36px, 10vw, 96px)",
                 fontWeight: 800,
+                color: "#FFFFFF",
                 letterSpacing: ".02em",
-                fill: "transparent",
-                stroke: "#FFFFFF",
-                strokeWidth: 2.2,
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-                strokeDasharray: 2000,
-                strokeDashoffset: 2000,
-                animation: "draw 1.6s .3s ease-out forwards, fillIn .7s 1.9s ease forwards",
+                opacity: 0,
+                animation: "textDraw .9s .3s ease-out forwards",
+                whiteSpace: "nowrap",
               }}
             >
               Results that
-            </text>
+            </div>
 
-            {/* Línea 2 */}
-            <text
-              id="preloader-text"
-              x="50%"
-              y="72%"
-              textAnchor="middle"
-              dominantBaseline="middle"
-              onAnimationEnd={(e) => {
-                if ((e as unknown as AnimationEvent).animationName === "fillIn") {
-                  setFading(true);
-                  setTimeout(() => {
-                    setVisible(false);
-                    markDone();
-                  }, FADE_OUT);
-                }
-              }}
+            {/* Line 2 – triggers fade on animation end */}
+            <div
               style={{
                 fontFamily: "system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif",
-                fontSize: textSize,
+                fontSize: "clamp(36px, 10vw, 96px)",
                 fontWeight: 800,
+                color: "#FFFFFF",
                 letterSpacing: ".02em",
-                fill: "transparent",
-                stroke: "#FFFFFF",
-                strokeWidth: 2.2,
-                strokeLinecap: "round",
-                strokeLinejoin: "round",
-                strokeDasharray: 2000,
-                strokeDashoffset: 2000,
-                animation: "draw 1.6s .3s ease-out forwards, fillIn .7s 1.9s ease forwards",
+                opacity: 0,
+                animation: "textDraw .9s .7s ease-out forwards",
+                whiteSpace: "nowrap",
               }}
+              onAnimationEnd={handleFillEnd}
             >
               matters!
-            </text>
-          </svg>
+            </div>
+          </div>
         </div>
       </div>
     </>
