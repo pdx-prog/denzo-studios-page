@@ -30,3 +30,42 @@ export async function notifyN8n(data: {
     // No lanzamos el error para no interrumpir el flujo principal
   }
 }
+
+export async function notifyCV(data: {
+  nombre_completo: string;
+  correo_electronico: string;
+  numero_contacto: string;
+  municipio: string;
+  departamento: string;
+  cv_url: string;
+}): Promise<void> {
+  try {
+    const response = await fetch(process.env.N8N_WEBHOOK_CV!, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error(`n8n CV webhook error: ${response.status}`);
+  } catch (error) {
+    console.error("Error notifying n8n CV webhook:", error);
+  }
+}
+
+export async function notifyPhoto(data: {
+  nombre_completo: string;
+  correo_electronico: string;
+  numero_contacto: string;
+  area_profesional: string;
+  foto_url: string;
+}): Promise<void> {
+  try {
+    const response = await fetch(process.env.N8N_WEBHOOK_PHOTO!, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) throw new Error(`n8n Photo webhook error: ${response.status}`);
+  } catch (error) {
+    console.error("Error notifying n8n Photo webhook:", error);
+  }
+}

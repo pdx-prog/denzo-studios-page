@@ -4,6 +4,8 @@ import HeroSection from "@/components/jointheteam/HeroSection";
 import JobsSection from "@/components/jointheteam/JobsSection";
 import AboutSection from "@/components/jointheteam/AboutSection";
 import CultureSection from "@/components/jointheteam/CultureSection";
+import CVSection from "@/components/jointheteam/CVSection";
+import PhotoSection from "@/components/jointheteam/PhotoSection";
 import FSPreloader from "@/components/jointheteam/FSPreloader";
 import { PreloaderProvider } from "@/components/jointheteam/PreloaderContext";
 
@@ -23,6 +25,8 @@ export default function JoinTheTeamPage() {
           <JobsSection />
           <AboutSection />
           <CultureSection />
+          <CVSection />
+          <PhotoSection />
         </main>
         <JoinFooter />
       </div>
