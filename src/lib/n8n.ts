@@ -31,14 +31,7 @@ export async function notifyN8n(data: {
   }
 }
 
-export async function notifyCV(data: {
-  nombre_completo: string;
-  correo_electronico: string;
-  numero_contacto: string;
-  municipio: string;
-  departamento: string;
-  cv_url: string;
-}): Promise<void> {
+export async function notifyCV(data: any): Promise<void> {
   try {
     const webhookUrl = process.env.N8N_WEBHOOK_CV;
     if (!webhookUrl) {

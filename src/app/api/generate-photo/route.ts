@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import { getSupabaseAdmin } from "@/lib/supabase";
-import { processPhotoWithFalAI } from "@/lib/falai";
 import { notifyPhoto } from "@/lib/n8n";
 
 export async function POST(request: Request) {
@@ -63,21 +62,13 @@ export async function POST(request: Request) {
 
     const originalPhotoUrl = publicUrlData.publicUrl;
 
-    let processedPhotoUrl = originalPhotoUrl;
-
-    try {
-      processedPhotoUrl = await processPhotoWithFalAI(originalPhotoUrl);
-    } catch (error) {
-      console.error("Error procesando foto con fal.ai:", error);
-    }
-
     const { error: dbError } = await supabase.from("photo_requests").insert([
       {
         nombre_completo,
         correo_electronico,
         numero_contacto,
         area_profesional,
-        foto_url: processedPhotoUrl,
+        foto_url: originalPhotoUrl,
       },
     ]);
 
@@ -90,7 +81,7 @@ export async function POST(request: Request) {
       correo_electronico,
       numero_contacto,
       area_profesional,
-      foto_url: processedPhotoUrl,
+      foto_url: originalPhotoUrl,
     });
 
     return NextResponse.json({ success: true });
