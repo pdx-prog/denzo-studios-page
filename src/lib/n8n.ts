@@ -40,7 +40,13 @@ export async function notifyCV(data: {
   cv_url: string;
 }): Promise<void> {
   try {
-    const response = await fetch(process.env.N8N_WEBHOOK_CV!, {
+    const webhookUrl = process.env.N8N_WEBHOOK_CV;
+    if (!webhookUrl) {
+      console.warn("N8N_WEBHOOK_CV no está definido. Omitiendo notificación de CV.");
+      return;
+    }
+    console.log("[n8n] Enviando a N8N_WEBHOOK_CV:", webhookUrl);
+    const response = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -59,7 +65,13 @@ export async function notifyPhoto(data: {
   foto_url: string;
 }): Promise<void> {
   try {
-    const response = await fetch(process.env.N8N_WEBHOOK_PHOTO!, {
+    const webhookUrl = process.env.N8N_WEBHOOK_PHOTO;
+    if (!webhookUrl) {
+      console.warn("N8N_WEBHOOK_PHOTO no está definido. Omitiendo notificación de foto.");
+      return;
+    }
+    console.log("[n8n] Enviando a N8N_WEBHOOK_PHOTO:", webhookUrl);
+    const response = await fetch(webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
