@@ -33,7 +33,7 @@ const initialPersonalState = {
 };
 
 export default function CVSection() {
-  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [personal, setPersonal] = useState(initialPersonalState);
   const [professional, setProfessional] = useState(emptyProfessionalState);
   const [submitted, setSubmitted] = useState(false);
@@ -120,6 +120,22 @@ export default function CVSection() {
     } as CVProfessionalData));
   };
 
+  const flushExperienceIfPending = () => {
+    if (
+      experienceInput.empresa.trim() ||
+      experienceInput.cargo.trim() ||
+      experienceInput.fecha_inicio.trim() ||
+      experienceInput.fecha_fin.trim() ||
+      experienceInput.funciones.trim()
+    ) {
+      setProfessional((prev) => ({
+        ...prev,
+        experiencias: [...prev.experiencias, experienceInput],
+      }));
+      setExperienceInput(emptyExperience);
+    }
+  };
+
   const handleSubmit = async () => {
     setConfirmVisible(true);
     setSubmitted(true);
@@ -131,7 +147,7 @@ export default function CVSection() {
       instituciones: professional.instituciones,
       cursos_certificaciones: professional.cursos_certificaciones,
       area_interes: professional.area_interes,
-      experiencias: professional.tiene_experiencia ? professional.experiencias : [],
+      experiencias: professional.experiencias,
       conocimientos_tecnicos: professional.conocimientos_tecnicos,
       herramientas: professional.herramientas,
       idiomas: professional.idiomas,
@@ -162,7 +178,7 @@ export default function CVSection() {
                 Construye un CV que abra nuevas oportunidades
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl">
-                Completa el formulario y nuestra IA generará un CV profesional basado en tu perfil.
+                Completa el formulario y se enviarán tus datos para el proceso de selección.
               </p>
             </div>
 
@@ -175,7 +191,7 @@ export default function CVSection() {
                       <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">Información Personal</h3>
                     </div>
                     <div className="rounded-full bg-violet-100 px-4 py-2 text-sm font-medium text-violet-700 dark:bg-[#00AAFF]/10 dark:text-[#00AAFF]">
-                      {step}/3
+                      {step}/4
                     </div>
                   </div>
 
@@ -213,13 +229,18 @@ export default function CVSection() {
                       <p className="text-sm font-semibold text-violet-600 dark:text-[#00AAFF]">Paso 2</p>
                       <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">Información Profesional</h3>
                     </div>
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
-                    >
-                      Volver al personal
-                    </button>
+                    <div className="flex items-center gap-4">
+                      <span className="rounded-full bg-violet-100 px-4 py-2 text-sm font-medium text-violet-700 dark:bg-[#00AAFF]/10 dark:text-[#00AAFF]">
+                        {step}/4
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setStep(1)}
+                        className="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
+                      >
+                        Volver
+                      </button>
+                    </div>
                   </div>
 
                   <div className="mt-8 grid gap-4">
@@ -309,140 +330,16 @@ export default function CVSection() {
                       />
                     </label>
 
-                    <div className="rounded-3xl border border-gray-200/80 bg-white p-5 dark:border-white/10 dark:bg-[#0d0d0d]">
-                      <div className="flex items-center justify-between gap-4">
-                        <div>
-                          <p className="text-sm font-medium text-gray-700 dark:text-gray-200">¿Tienes experiencia laboral?</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            setProfessional((prev) => ({
-                              ...prev,
-                              tiene_experiencia: !prev.tiene_experiencia,
-                            }));
-                          }}
-                          className="rounded-full border px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
-                        >
-                          {professional.tiene_experiencia ? "Sí" : "No"}
-                        </button>
-                      </div>
-
-                      <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
-                        {professional.tiene_experiencia
-                          ? "Comparte tus experiencias para que nuestro modelo destaque tus logros y responsabilidades más relevantes."
-                          : "Si no tienes experiencia laboral, no te preocupes. Podemos destacar proyectos académicos, voluntariados o actividades extracurriculares."}
-                      </p>
-                    </div>
-
-                    {professional.tiene_experiencia ? (
-                      <div className="rounded-3xl border border-gray-200/80 bg-white p-5 dark:border-white/10 dark:bg-[#0d0d0d]">
-                        <div className="grid gap-4">
-                          <div className="grid gap-4 md:grid-cols-2">
-                            <label className="block">
-                              <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Empresa</span>
-                              <input
-                                type="text"
-                                value={experienceInput.empresa}
-                                onChange={(event) => setExperienceInput((prev) => ({ ...prev, empresa: event.target.value }))}
-                                className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
-                              />
-                            </label>
-                            <label className="block">
-                              <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Cargo</span>
-                              <input
-                                type="text"
-                                value={experienceInput.cargo}
-                                onChange={(event) => setExperienceInput((prev) => ({ ...prev, cargo: event.target.value }))}
-                                className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
-                              />
-                            </label>
-                          </div>
-
-                          <div className="grid gap-4 md:grid-cols-2">
-                            <label className="block">
-                              <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Fecha inicio</span>
-                              <input
-                                type="text"
-                                placeholder="Ej. Ene 2023"
-                                value={experienceInput.fecha_inicio}
-                                onChange={(event) => setExperienceInput((prev) => ({ ...prev, fecha_inicio: event.target.value }))}
-                                className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
-                              />
-                            </label>
-                            <label className="block">
-                              <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Fecha fin</span>
-                              <input
-                                type="text"
-                                placeholder="Ej. Dic 2024 / Presente"
-                                value={experienceInput.fecha_fin}
-                                onChange={(event) => setExperienceInput((prev) => ({ ...prev, fecha_fin: event.target.value }))}
-                                className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
-                              />
-                            </label>
-                          </div>
-
-                          <label className="block">
-                            <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Funciones</span>
-                            <textarea
-                              value={experienceInput.funciones}
-                              onChange={(event) => setExperienceInput((prev) => ({ ...prev, funciones: event.target.value }))}
-                              rows={4}
-                              className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
-                            />
-                          </label>
-
-                          <button
-                            type="button"
-                            onClick={addExperience}
-                            className="inline-flex items-center justify-center rounded-2xl bg-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-violet-700"
-                          >
-                            Agregar experiencia
-                          </button>
-                        </div>
-
-                        {professional.experiencias.length > 0 && (
-                          <div className="mt-6 space-y-3">
-                            <h4 className="text-lg font-semibold text-gray-900 dark:text-white">Tus experiencias</h4>
-                            <div className="grid gap-3">
-                              {professional.experiencias.map((experience, index) => (
-                                <div key={index} className="rounded-2xl border border-gray-200 p-4 dark:border-white/10">
-                                  <div className="flex items-start justify-between gap-4">
-                                    <div>
-                                      <p className="font-semibold text-gray-900 dark:text-white">{experience.cargo} en {experience.empresa}</p>
-                                      <p className="text-sm text-gray-500 dark:text-gray-400">{experience.fecha_inicio} · {experience.fecha_fin}</p>
-                                    </div>
-                                    <button
-                                      type="button"
-                                      onClick={() => removeExperience(index)}
-                                      className="text-sm font-medium text-red-600 transition hover:text-red-800 dark:text-red-400"
-                                    >
-                                      Eliminar
-                                    </button>
-                                  </div>
-                                  <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{experience.funciones}</p>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : null}
-
-                      <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
                       <button
                         type="button"
-                        onClick={() => setStep(1)}
-                        className="inline-flex items-center justify-center rounded-2xl border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:border-violet-400 dark:border-white/10 dark:text-gray-200"
-                      >
-                        Regresar
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setStep(3)}
+                        onClick={() => {
+                          flushExperienceIfPending();
+                          setStep(3);
+                        }}
                         className="inline-flex items-center justify-center rounded-2xl bg-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-violet-700"
                       >
-                        Continuar a habilidades
+                        Continuar a experiencia
                       </button>
                     </div>
                   </div>
@@ -454,15 +351,185 @@ export default function CVSection() {
                   <div className="flex flex-wrap items-center justify-between gap-4">
                     <div>
                       <p className="text-sm font-semibold text-violet-600 dark:text-[#00AAFF]">Paso 3</p>
-                      <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">Habilidades</h3>
+                      <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">Experiencia</h3>
                     </div>
+                    <div className="flex items-center gap-4">
+                      <span className="rounded-full bg-violet-100 px-4 py-2 text-sm font-medium text-violet-700 dark:bg-[#00AAFF]/10 dark:text-[#00AAFF]">
+                        {step}/4
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          flushExperienceIfPending();
+                          setStep(2);
+                        }}
+                        className="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
+                      >
+                        Volver
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 rounded-3xl border border-gray-200/80 bg-white p-5 dark:border-white/10 dark:bg-[#0d0d0d]">
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-200">¿Tienes experiencia laboral?</p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setProfessional((prev) => ({
+                            ...prev,
+                            tiene_experiencia: !prev.tiene_experiencia,
+                          }));
+                        }}
+                        className="rounded-full border px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
+                      >
+                        {professional.tiene_experiencia ? "Sí" : "No"}
+                      </button>
+                    </div>
+
+                    <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-400">
+                      {professional.tiene_experiencia
+                        ? "Agrega tus experiencias laborales para destacar tus responsabilidades."
+                        : "Si no tienes experiencia laboral, comparte tus actividades extracurriculares (voluntariados, proyectos académicos, etc)."}
+                    </p>
+                  </div>
+
+                  <div className="mt-6 rounded-3xl border border-gray-200/80 bg-white p-5 dark:border-white/10 dark:bg-[#0d0d0d]">
+                    <div className="grid gap-4">
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <label className="block">
+                          <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            {professional.tiene_experiencia ? "Empresa" : "Institución / Organización"}
+                          </span>
+                          <input
+                            type="text"
+                            value={experienceInput.empresa}
+                            onChange={(event) => setExperienceInput((prev) => ({ ...prev, empresa: event.target.value }))}
+                            className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
+                          />
+                        </label>
+                        <label className="block">
+                          <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                            {professional.tiene_experiencia ? "Cargo" : "Rol / Actividad"}
+                          </span>
+                          <input
+                            type="text"
+                            value={experienceInput.cargo}
+                            onChange={(event) => setExperienceInput((prev) => ({ ...prev, cargo: event.target.value }))}
+                            className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
+                          />
+                        </label>
+                      </div>
+
+                      <div className="grid gap-4 md:grid-cols-2">
+                        <label className="block">
+                          <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Fecha inicio</span>
+                          <input
+                            type="text"
+                            placeholder="Ej. Ene 2023"
+                            value={experienceInput.fecha_inicio}
+                            onChange={(event) => setExperienceInput((prev) => ({ ...prev, fecha_inicio: event.target.value }))}
+                            className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
+                          />
+                        </label>
+                        <label className="block">
+                          <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">Fecha fin</span>
+                          <input
+                            type="text"
+                            placeholder="Ej. Dic 2024 / Presente"
+                            value={experienceInput.fecha_fin}
+                            onChange={(event) => setExperienceInput((prev) => ({ ...prev, fecha_fin: event.target.value }))}
+                            className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
+                          />
+                        </label>
+                      </div>
+
+                      <label className="block">
+                        <span className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                          {professional.tiene_experiencia ? "Funciones" : "Descripción de lo que hiciste"}
+                        </span>
+                        <textarea
+                          value={experienceInput.funciones}
+                          onChange={(event) => setExperienceInput((prev) => ({ ...prev, funciones: event.target.value }))}
+                          rows={4}
+                          className="mt-2 w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-gray-900 outline-none transition focus:border-violet-500 focus:ring-2 focus:ring-violet-200 dark:border-white/10 dark:bg-[#121212] dark:text-gray-100"
+                        />
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={addExperience}
+                        className="inline-flex items-center justify-center rounded-2xl bg-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-violet-700"
+                      >
+                        {professional.tiene_experiencia ? "Agregar experiencia" : "Agregar actividad"}
+                      </button>
+                    </div>
+
+                    {professional.experiencias.length > 0 && (
+                      <div className="mt-6 space-y-3">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                          {professional.tiene_experiencia ? "Tus experiencias" : "Tus actividades"}
+                        </h4>
+                        <div className="grid gap-3">
+                          {professional.experiencias.map((experience, index) => (
+                            <div key={index} className="rounded-2xl border border-gray-200 p-4 dark:border-white/10">
+                              <div className="flex items-start justify-between gap-4">
+                                <div>
+                                  <p className="font-semibold text-gray-900 dark:text-white">{experience.cargo} en {experience.empresa}</p>
+                                  <p className="text-sm text-gray-500 dark:text-gray-400">{experience.fecha_inicio} · {experience.fecha_fin}</p>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => removeExperience(index)}
+                                  className="text-sm font-medium text-red-600 transition hover:text-red-800 dark:text-red-400"
+                                >
+                                  Eliminar
+                                </button>
+                              </div>
+                              <p className="mt-3 text-sm text-gray-600 dark:text-gray-300">{experience.funciones}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
                     <button
                       type="button"
-                      onClick={() => setStep(2)}
-                      className="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
+                      onClick={() => {
+                        flushExperienceIfPending();
+                        setStep(4);
+                      }}
+                      className="inline-flex items-center justify-center rounded-2xl bg-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-violet-700"
                     >
-                      Volver a profesional
+                      Continuar a habilidades
                     </button>
+                  </div>
+                </div>
+              ) : null}
+
+              {step === 4 ? (
+                <div className="rounded-3xl border border-gray-200/80 bg-gray-50 p-6 dark:border-white/10 dark:bg-[#111111]">
+                  <div className="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                      <p className="text-sm font-semibold text-violet-600 dark:text-[#00AAFF]">Paso 4</p>
+                      <h3 className="mt-2 text-2xl font-bold text-gray-900 dark:text-white">Habilidades</h3>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <span className="rounded-full bg-violet-100 px-4 py-2 text-sm font-medium text-violet-700 dark:bg-[#00AAFF]/10 dark:text-[#00AAFF]">
+                        {step}/4
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() => setStep(3)}
+                        className="rounded-full border border-gray-200 px-4 py-2 text-sm text-gray-700 transition hover:border-violet-300 dark:border-white/10 dark:text-gray-200"
+                      >
+                        Volver
+                      </button>
+                    </div>
                   </div>
 
                   <div className="mt-8 rounded-3xl border border-gray-200/80 bg-white p-5 dark:border-white/10 dark:bg-[#0d0d0d]">
@@ -529,21 +596,14 @@ export default function CVSection() {
                     </div>
                   </div>
 
-                  <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <button
-                      type="button"
-                      onClick={() => setStep(2)}
-                      className="inline-flex items-center justify-center rounded-2xl border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition hover:border-violet-400 dark:border-white/10 dark:text-gray-200"
-                    >
-                      Volver a profesional
-                    </button>
+                  <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-end">
                     <button
                       type="button"
                       onClick={handleSubmit}
                       disabled={submitted}
                       className="inline-flex items-center justify-center rounded-2xl bg-violet-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-violet-700 disabled:cursor-not-allowed disabled:opacity-60"
                     >
-                      Comenzar mi CV
+                      Enviar datos de CV
                     </button>
                   </div>
                 </div>
@@ -553,27 +613,27 @@ export default function CVSection() {
                 <div className="rounded-3xl border border-green-200 bg-green-50 p-5 text-green-800 dark:border-green-900/30 dark:bg-green-950/20 dark:text-green-200">
                   <p className="font-semibold">¡Gracias por registrarte!</p>
                   <p className="mt-2 text-sm">
-                    Hemos recibido tu información correctamente. Nuestro equipo revisará los datos proporcionados y te acompañará en la creación de un CV profesional que te ayudará a destacar en futuras oportunidades laborales.
+                    Hemos recibido tu información correctamente. Nuestro equipo revisará los datos proporcionados y te acompañará en el proceso.
                   </p>
                 </div>
               ) : null}
             </div>
           </div>
 
-          <div className="rounded-[2rem] bg-violet-950 px-8 py-12 text-white shadow-2xl shadow-violet-500/10 dark:bg-[#081030]">
+          <div className="rounded-[2rem] bg-violet-950 px-8 py-12 text-white shadow-2xl shadow-violet-500/10 dark:bg-[#081030] h-fit sticky top-24">
             <div className="mb-8">
               <div className="h-60 w-full overflow-hidden rounded-[2rem] bg-white/10" />
             </div>
             <div className="space-y-6">
               <p className="text-sm uppercase tracking-[.3em] text-violet-300">Inspiración</p>
-              <h3 className="text-3xl font-bold">Diseña un currículum estratégico</h3>
+              <h3 className="text-3xl font-bold">Diseña un perfil estratégico</h3>
               <p className="text-sm leading-7 text-violet-100/90">
-                Con nuestra ayuda, tu CV incluirá experiencia, formación y habilidades con enfoque profesional para LinkedIn, solicitudes y entrevistas.
+                Tu perfil incluirá experiencia, formación y habilidades con enfoque profesional para solicitudes y entrevistas.
               </p>
               <div className="grid gap-3 text-sm text-violet-100/80">
-                <div className="rounded-3xl bg-white/5 p-4">Presenta tu educación y experiencia de forma clara.</div>
+                <div className="rounded-3xl bg-white/5 p-4">Presenta tu educación de forma clara.</div>
                 <div className="rounded-3xl bg-white/5 p-4">Convierte tus logros en resultados medibles.</div>
-                <div className="rounded-3xl bg-white/5 p-4">Obtén recomendaciones de habilidades adaptadas a tu perfil.</div>
+                <div className="rounded-3xl bg-white/5 p-4">Destaca tus habilidades adaptadas a tu rol.</div>
               </div>
             </div>
           </div>
