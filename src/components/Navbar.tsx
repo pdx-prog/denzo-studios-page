@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Phone, ChevronDown, Search, BrainCircuit, PhoneCall, Palette, Code2, Menu, X, Globe } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
@@ -34,29 +34,80 @@ export default function Navbar() {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
+  // Once scroll passes the hero going down, the navbar should stay visible
+  // no matter what — only re-arm the hide-on-scroll-down behavior if the
+  // user scrolls back up into the hero section.
+  const belowHero = useRef(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleEnter = () => {
+      belowHero.current = false;
+    };
+    const handleLeave = () => {
+      belowHero.current = true;
+      setIsVisible(true);
+    };
+    const handleLeaveBack = () => {
+      belowHero.current = false;
+    };
+
+    window.addEventListener('videoSectionEnter', handleEnter);
+    window.addEventListener('videoSectionLeave', handleLeave);
+    window.addEventListener('videoSectionLeaveBack', handleLeaveBack);
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setScrolled(currentScrollY > 20);
+
+      if (belowHero.current) {
+        setIsVisible(true); // Ya pasamos el hero: siempre visible
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false); // Ocultar al hacer scroll hacia abajo (dentro del hero)
+      } else {
+        setIsVisible(true);  // Mostrar al hacer scroll hacia arriba o al tope
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('videoSectionEnter', handleEnter);
+      window.removeEventListener('videoSectionLeave', handleLeave);
+      window.removeEventListener('videoSectionLeaveBack', handleLeaveBack);
+    };
   }, []);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
-    <>
+    <header className="z-[100]">
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
-        className={`fixed top-0 left-0 w-full z-[100] px-4 py-4 sm:px-6 lg:px-8 flex justify-between items-center transition-all duration-500 ${scrolled || isMobileMenuOpen ? "bg-white dark:bg-black/80 backdrop-blur-2xl border-b border-black/10 dark:border-white/10" : "bg-transparent"
-          }`}
+        initial={{ opacity: 0, filter: "blur(12px)" }}
+        animate={{
+          opacity: isVisible || isMobileMenuOpen ? 1 : 0.35,
+          filter: isVisible || isMobileMenuOpen ? "blur(0px)" : "blur(10px)",
+        }}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+        style={{ pointerEvents: isVisible || isMobileMenuOpen ? "auto" : "none" }}
+        className={`fixed top-0 left-0 w-full z-[100] px-4 py-3 sm:px-6 lg:px-8 flex justify-between items-center transition-colors duration-500 ${
+          isMobileMenuOpen
+            ? "bg-white dark:bg-black/90 backdrop-blur-2xl border-b border-black/10 dark:border-white/10"
+            : !isVisible
+            ? "bg-transparent border-transparent"
+            : scrolled
+            ? "bg-white/40 dark:bg-black/30 backdrop-blur-2xl border-b border-black/10 dark:border-white/10"
+            : "bg-transparent"
+        }`}
       >
         {/* Logo */}
         <Link href="/" className="flex items-center relative z-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-neon-cyan rounded-md group">
-          <div className="relative flex items-center justify-center">
-            <img src="/logo.png" alt="Denzo Studios Logo" className="h-[56px] md:h-[72px] w-auto object-contain transition-all duration-300 dark:opacity-0 group-hover:scale-105" />
-            <div className="absolute inset-0 bg-gradient-to-r from-[#007AFF] to-[#7AB6FF] [mask-image:url(/logo.png)] [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-image:url(/logo.png)] [-webkit-mask-size:contain] [-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] transition-all duration-300 opacity-0 dark:opacity-100 group-hover:scale-105" />
+          <div className="relative h-11 md:h-14 flex items-center justify-center">
+            <img src="/logo.png" alt="Denzo Studios Logo" className="h-12 md:h-16 w-auto object-contain transition-all duration-300 dark:opacity-0 group-hover:scale-105" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-12 md:h-16 aspect-505/178 bg-gradient-to-r from-[#007AFF] to-[#7AB6FF] [mask-image:url(/logo.png)] [mask-size:contain] [mask-repeat:no-repeat] [mask-position:center] [-webkit-mask-image:url(/logo.png)] [-webkit-mask-size:contain] [-webkit-mask-repeat:no-repeat] [-webkit-mask-position:center] transition-all duration-300 opacity-0 dark:opacity-100 group-hover:scale-105" />
           </div>
         </Link>
 
@@ -203,6 +254,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </header>
   );
 }

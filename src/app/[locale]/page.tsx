@@ -1,30 +1,28 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Cards from "@/components/Cards";
+import HeroHeadline from "@/components/HeroHeadline";
 import TrustTicker from "@/components/TrustTicker";
 import BentoGrid from "@/components/BentoGrid";
-import TripleGrowth from "@/components/TripleGrowth";
-import TechDNA from "@/components/TechDNA";
+import AboutStack from "@/components/AboutStack";
 import EcommerceTicker from "@/components/EcommerceTicker";
 import VisualShowcase from "@/components/VisualShowcase";
 import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col bg-background text-foreground selection:bg-neon-cyan/30">
+    <main className="min-h-screen bg-background text-foreground selection:bg-neon-cyan/30">
       <Navbar />
       <Hero />
-      <Cards />
+      <HeroHeadline />
       <TrustTicker />
 
       <div id="services">
         <BentoGrid />
       </div>
-      <VisualShowcase />
       <div id="about">
-        <TripleGrowth />
-        <TechDNA />
+        <AboutStack />
       </div>
+      <VisualShowcase />
       <EcommerceTicker />
       <div id="contact">
         <Footer />
